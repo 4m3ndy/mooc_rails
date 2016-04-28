@@ -16,6 +16,9 @@ class ApplicationController < ActionController::Base
 
     devise_parameter_sanitizer.for(:sign_up) << :status
     devise_parameter_sanitizer.for(:account_update) << :status
+
+    devise_parameter_sanitizer.for(:sign_up) << :date_of_birth
+    devise_parameter_sanitizer.for(:account_update) << :date_of_birth
   end
 
 end
