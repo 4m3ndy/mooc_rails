@@ -34,6 +34,10 @@ gem 'jquery-ui-rails'
 gem 'devise', '3.4.1'
 gem 'bootstrap-sass'
 
+#Carrier Wave Gem for Files Uploading
+gem 'carrierwave', '~> 0.10.0'
+gem 'mini_magick', '~> 4.3'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
