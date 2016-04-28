@@ -5,6 +5,13 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
+      ## User Attributes
+      t.string :name
+      t.string :status
+      t.string :image
+      t.string :gender
+      t.date :date_of_birth
+
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
@@ -18,12 +25,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       #t.string :image
       #t.string :gender, null: false
       #t.string :date_of_birth, null:false
-
-      t.string :name
-      t.string :type
-      t.string :image
-      t.string :gender
-      t.string :date_of_birth
 
       ## Trackable
       #t.integer  :sign_in_count, default: 0, null: false
