@@ -30,6 +30,8 @@ gem 'jquery-turbolinks'
 # Enabling jQuery UI for DatePicker
 gem 'jquery-ui-rails'
 
+# Active Admin Gem for managing and adminstration
+gem 'activeadmin', '~> 1.0.0.pre2'
 
 gem 'devise', '3.4.1'
 gem 'bootstrap-sass'
