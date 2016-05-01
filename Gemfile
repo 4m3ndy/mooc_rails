@@ -40,6 +40,12 @@ gem 'bootstrap-sass'
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3'
 
+
+#CKeditor Gem  for Rich Text / PaperClip Gem for File Uploading
+gem 'ckeditor'
+gem 'paperclip'
+
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 

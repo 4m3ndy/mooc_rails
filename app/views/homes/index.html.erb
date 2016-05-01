@@ -54,14 +54,20 @@
 
       <hr>
 
-      <div class="row">
-        <div class="col-xs-offset-4 col-xs-4">
-          <h3 align="center"> Ready to Create a Course ? </h3>
-          <a class="btn btn-success btn-lg btn-block" href="#">
-            <span class="glyphicon glyphicon-education" aria-hidden="true"></span> Create Course
-          </a>
-        </div>
-      </div>
-
+      <% if user_signed_in? %>
+          <%if current_user.status === "instructor"  %>
+              <div class="row">
+                <div class="col-xs-offset-4 col-xs-4">
+                  <h3 align="center"> Ready to Create a Course ? </h3>
+                  <%= link_to '<span class="glyphicon glyphicon-education" aria-hidden="true"></span> Create Course'.html_safe, new_course_path, class: 'btn btn-success btn-lg btn-block' %>
+                </div>
+              </div>
+          <% end %>
+      <% end %>
     </section>
+    <br>
+    <br>
+    <footer class="footer container-fluid" style="background-color: darkolivegreen">
+      <br><br><br>
+    </footer>
 <% end %>
