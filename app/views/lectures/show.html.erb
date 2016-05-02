@@ -14,11 +14,13 @@
         by <a><%= @lecture.user.name %></a>
       </p>
 
+      <% if @lecture.user.id === current_user.id %>
       <p>
         <%= link_to '<span class="glyphicon glyphicon-remove"></span> Delete'.html_safe, @lecture, class: 'btn btn-danger',method: :delete, data: { confirm: 'Are you sure?' } %>
         <span>  </span>
         <%= link_to '<span class="glyphicon glyphicon-edit"></span> Edit'.html_safe, edit_lecture_url(@lecture), class: 'btn btn-success', data: { no_turbolink: true }  %>
       </p>
+      <% end %>
 
       <hr>
 
@@ -26,6 +28,23 @@
       <div id="post_desc" class="container-fluid">
         <p class="lead"><%= @lecture.content.html_safe %></p>
       </div>
+
+      <hr>
+
+      <div>
+        <h4>Was this helpful?</h4>
+        <%= link_to like_lecture_path(@lecture), class: 'like', method: :put do %>
+          <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center"></span>
+          <span class="badge"><%= @lecture.get_upvotes.size %></span>
+        <% end %>
+
+        <%= link_to dislike_lecture_path(@lecture), class: 'dislike', method: :put do %>
+            <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center"></span>
+            <span class="badge"><%= @lecture.get_downvotes.size %></span>
+        <% end %>
+      </div>
+
+
 
       <% if @lecture.attachment.file != nil %>
           <hr>

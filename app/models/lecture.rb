@@ -4,5 +4,6 @@ class Lecture < ActiveRecord::Base
   has_many :comments
 
   mount_uploader :attachment, AttachmentUploader
+  acts_as_votable
 
 end

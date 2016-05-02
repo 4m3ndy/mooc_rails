@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  acts_as_voter
+
   validates_processing_of :image
   validate :image_size_validation
 

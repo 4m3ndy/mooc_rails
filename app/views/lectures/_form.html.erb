@@ -1,4 +1,4 @@
-<%= form_for(@lecture) do |f| %>
+<%= form_for(@lecture, :url => { :action => :create }) do |f| %>
   <% if @lecture.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@lecture.errors.count, "error") %> prohibited this lecture from being saved:</h2>
@@ -32,7 +32,7 @@
     <br>
   </div>
 
-  <%= hidden_field_tag 'lecture[course_id]', params[:c_id] %>
+  <%= hidden_field_tag 'lecture[course_id]', params[:c_id]  if params[:c_id] != nil%>
 
   <div class="actions">
     <%= f.submit %>

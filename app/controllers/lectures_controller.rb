@@ -1,26 +1,26 @@
 class LecturesController < InheritedResources::Base
-
-
+  before_action :authenticate_user!
+  before_action :set_lecture, only: [:show, :edit, :update, :destroy,:upvote, :downvote]
+  before_action :verify_user, only: [:edit, :update, :destroy]
 
   def create
     @lecture = Lecture.new(lecture_params)
     @lecture.user_id = current_user.id
-
-
     respond_to do |format|
       if @lecture.save
-        format.html { redirect_to @lecture }
+        format.html { redirect_to lecture_path(@lecture) }
         format.json { render :show, status: :created, location: @lecture }
-      else
-        format.html { render :new }
-        format.json { render json: @lecture.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  def render_404
+  def new
+    @lecture = Lecture.new
+  end
+
+  def render_422
     respond_to do |format|
-      format.html { render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found }
+      format.html { render :file => "#{Rails.root}/public/422", :layout => false, :status => :not_found }
       format.xml  { head :not_found }
       format.any  { head :not_found }
     end
@@ -36,7 +36,40 @@ class LecturesController < InheritedResources::Base
     end
   end
 
+
+  def upvote
+    @lecture.liked_by current_user
+    redirect_to @lecture
+  end
+
+  def downvote
+    @lecture.disliked_by current_user
+    redirect_to @lecture
+  end
+
+  def destroy
+    @lecture.destroy
+    respond_to do |format|
+      format.html { redirect_to root_url, notice: 'Lecture was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
+
+    def set_lecture
+      @lecture = Lecture.find(params[:id])
+    end
+
+  def verify_user
+    if @lecture.user.id != current_user.id
+      respond_to do |format|
+        format.html { render :file => "#{Rails.root}/public/422", :layout => false, :status => :not_found }
+        format.xml  { head :not_found }
+        format.any  { head :not_found }
+      end
+    end
+  end
 
     def comment_params
       params.require(:comment).permit(:comment, :lecture_id, :user_id)

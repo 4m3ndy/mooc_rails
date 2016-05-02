@@ -4,3 +4,26 @@
 #attach{
   font-size: 1.5em;
 }
+
+.like{
+  font-size: 1.5em;
+}
+
+
+.like:hover {
+  font-size: 2em;
+  text-decoration: none;
+}
+
+.dislike{
+  font-size: 1.5em;
+}
+
+.dislike:hover{
+  font-size: 2em;
+  text-decoration: none;
+}
+
+.badge{
+  text-decoration: none;
+}

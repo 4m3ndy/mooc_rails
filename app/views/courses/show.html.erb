@@ -22,7 +22,7 @@
       </th>
       <th class="cell-stat text-center hidden-xs hidden-sm">Likes</th>
       <th class="cell-stat text-center hidden-xs hidden-sm">Comments</th>
-      <th class="cell-stat-2x hidden-xs hidden-sm">Last Post</th>
+      <th class="cell-stat-2x hidden-xs hidden-sm">Last Comment</th>
     </tr>
     </thead>
     <tbody>
@@ -32,9 +32,9 @@
       <td>
         <h4> <%= link_to lecture.title, lecture %> <br><small>Some description</small></h4>
       </td>
-      <td class="text-center hidden-xs hidden-sm"><a href="#">9 542</a></td>
-      <td class="text-center hidden-xs hidden-sm"><a href="#">89 897</a></td>
-      <td class="hidden-xs hidden-sm">by <%= link_to lecture.user.name %><br><small><i class="fa fa-clock-o"></i><%= lecture.created_at %></small></td>
+      <td class="text-center hidden-xs hidden-sm"><a><%= lecture.get_upvotes.size %></a></td>
+      <td class="text-center hidden-xs hidden-sm"><a><%= lecture.comments.size %></a></td>
+      <td class="hidden-xs hidden-sm"><%= 'by' if lecture.comments.size != 0 %> <%= link_to lecture.comments.last.user.name if lecture.comments.size != 0 %><br><small><i class="fa fa-clock-o"></i><%= lecture.comments.last.created_at if lecture.comments.size != 0 %></small></td>
     </tr>
     <% end %>
     </tbody>
