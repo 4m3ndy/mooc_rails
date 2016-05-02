@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160501225817) do
+ActiveRecord::Schema.define(version: 20160502084554) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -62,6 +62,17 @@ ActiveRecord::Schema.define(version: 20160501225817) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
+  create_table "comments", force: :cascade do |t|
+    t.text     "comment",    limit: 65535
+    t.integer  "user_id",    limit: 4
+    t.integer  "lecture_id", limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "comments", ["lecture_id"], name: "index_comments_on_lecture_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
   create_table "courses", force: :cascade do |t|
     t.string   "title",       limit: 255
     t.integer  "user_id",     limit: 4
@@ -104,6 +115,8 @@ ActiveRecord::Schema.define(version: 20160501225817) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "comments", "lectures"
+  add_foreign_key "comments", "users"
   add_foreign_key "courses", "users"
   add_foreign_key "lectures", "courses"
   add_foreign_key "lectures", "users"

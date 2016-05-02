@@ -27,10 +27,10 @@
         <p class="lead"><%= @lecture.content.html_safe %></p>
       </div>
 
-      <hr>
-      <br>
-      <p class="lead">Download attachment:</p>
       <% if @lecture.attachment.file != nil %>
+          <hr>
+          <br>
+          <p class="lead">Download attachment:</p>
         <% file = '<i class="glyphicon glyphicon-paperclip"></i> '+@lecture.attachment.file.basename %>
         <%= link_to file.html_safe, @lecture.attachment.url, id: 'attach' %>
       <% end %>
@@ -43,30 +43,25 @@
       <!-- Comment -->
       <h3>Comments: </h3>
       <div id="comments_section" class="container-fluid">
-        <div comment_id="81" class="comment media">
+        <% @lecture.comments.each do |comment| %>
+        <div class="comment media">
           <a class="pull-left" href="#">
             <img class="media-object" src="http://placehold.it/64x64" alt="">
           </a>
           <div class="media-body">
-            <h4 class="media-heading">Yasmine
-              <small>August 25, 2014 at 9:30 PM</small>
-            </h4><p class="comment_value">Lorem ipsum dolor sit amet</p></div>
+            <h4 class="media-heading"><%= comment.user.name %>
+              <small><%= comment.created_at %></small>
+            </h4><blockquote class="comment_value"><%= comment.comment %></blockquote></div>
         </div>
+        <% end %>
       </div>
-      <hr>
+      
       <br>
       <!-- Comments Form -->
-
-      <div class="well">
-        <h4>Leave a Comment:</h4>
-        <div role="form">
-          <div class="form-group">
-            <textarea id="commentText" class="form-control" rows="3"></textarea>
-          </div>
-          <button id="addComment_button" class="btn btn-primary">Submit</button>
-        </div>
-      </div>
       <hr>
+
+      <%=render 'comment' %>
+
     </div>
   </div>
 </div>

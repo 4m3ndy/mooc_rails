@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :courses
   has_many :lectures
+  has_many :comments
 
   mount_uploader :image, ImageUploader
 

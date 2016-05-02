@@ -2,9 +2,12 @@ Rails.application.routes.draw do
 
   #resources :lectures
 
+
+
   resources :lectures do
     collection do
 
+      post 'create_comment', :action => 'create_comment'
       get 'new', :action => 'render_404'
       post 'new', :action => 'new'
 
