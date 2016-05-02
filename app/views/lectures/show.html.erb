@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row">
+    <!-- Blog Post Content Column -->
+    <div class="post col-xs-12">
+      <!-- Blog Post -->
+
+      <!-- Title -->
+      <div id="post_title">
+        <h1><%= @lecture.title %></h1>
+      </div>
+
+      <!-- Author -->
+      <p class="lead">
+        by <a><%= @lecture.user.name %></a>
+      </p>
+
+      <p>
+        <%= link_to '<span class="glyphicon glyphicon-remove"></span> Delete'.html_safe, @lecture, class: 'btn btn-danger',method: :delete, data: { confirm: 'Are you sure?' } %>
+        <span>  </span>
+        <%= link_to '<span class="glyphicon glyphicon-edit"></span> Edit'.html_safe, edit_lecture_url(@lecture), class: 'btn btn-success', data: { no_turbolink: true }  %>
+      </p>
+
+      <hr>
+
+      <!-- Post Content -->
+      <div id="post_desc" class="container-fluid">
+        <p class="lead"><%= @lecture.content.html_safe %></p>
+      </div>
+
+      <hr>
+      <br>
+      <p class="lead">Download attachment:</p>
+      <% if @lecture.attachment.file != nil %>
+        <% file = '<i class="glyphicon glyphicon-paperclip"></i> '+@lecture.attachment.file.basename %>
+        <%= link_to file.html_safe, @lecture.attachment.url, id: 'attach' %>
+      <% end %>
+
+      <hr>
+
+      <!-- Blog Comments -->
+
+      <!-- Posted Comments -->
+      <!-- Comment -->
+      <h3>Comments: </h3>
+      <div id="comments_section" class="container-fluid">
+        <div comment_id="81" class="comment media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="http://placehold.it/64x64" alt="">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">Yasmine
+              <small>August 25, 2014 at 9:30 PM</small>
+            </h4><p class="comment_value">Lorem ipsum dolor sit amet</p></div>
+        </div>
+      </div>
+      <hr>
+      <br>
+      <!-- Comments Form -->
+
+      <div class="well">
+        <h4>Leave a Comment:</h4>
+        <div role="form">
+          <div class="form-group">
+            <textarea id="commentText" class="form-control" rows="3"></textarea>
+          </div>
+          <button id="addComment_button" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+</div>

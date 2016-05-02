@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
 
+  #resources :lectures
+
+  resources :lectures do
+    collection do
+
+      get 'new', :action => 'render_404'
+      post 'new', :action => 'new'
+
+      # more actions...
+    end
+  end
+
+
+  mount Ckeditor::Engine => '/ckeditor'
   resources :courses
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

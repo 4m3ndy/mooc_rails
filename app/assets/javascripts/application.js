@@ -16,6 +16,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui
+//= require ckeditor/init
 //= require bootstrap/dropdown
 //= require turbolinks
 //= require_tree

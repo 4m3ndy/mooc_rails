@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
 
   has_many :courses
+  has_many :lectures
 
   mount_uploader :image, ImageUploader
 
