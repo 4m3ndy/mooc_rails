@@ -8,7 +8,11 @@
       <% @courses.each do |course| %>
         <div class="col-md-3">
           <div>
-            <img src="http://lorempixel.com/200/200/abstract/1/" alt="Texto Alternativo" class="img img-thumbnail">
+            <% if course.image.file != nil %>
+                <%= image_tag course.image.url, class:'img img-circle', size: "200x200"%>
+            <% else %>
+                <img class="media-object img img-circle" src="http://lorempixel.com/200/200/abstract/2/" alt="">
+            <% end %>
             <h2><%= course.title %></h2>
             <p>By: <%= link_to course.user.name %></p>
             <%= link_to 'View Course', course, class: 'btn btn-default' %>
@@ -16,6 +20,12 @@
         </div>
       <% end %>
     </div>
+  </div>
+  <hr>
+  <div align="center">
+    <%= paginate @courses %>
+    <br>
+    <%= page_entries_info @courses %>
   </div>
 </div>
 <!-- /container -->

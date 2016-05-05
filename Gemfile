@@ -48,6 +48,9 @@ gem 'paperclip'
 #Acts as Votable Gem for Likes
 gem 'acts_as_votable'
 
+#kamrinari gem for pagination
+gem 'kaminari', '~> 0.16.1'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 

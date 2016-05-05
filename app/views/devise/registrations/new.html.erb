@@ -1,56 +1,62 @@
-<% header "Sign Up" %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3">
+       <h1>Sign Up</h1>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
 
-    <div class="form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
-    </div>
+          <div class="form-group">
+            <%= f.label :email %>
+            <%= f.email_field :email, autofocus: 'true' ,class: 'form-control' %>
+          </div>
 
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, autofocus: 'true' ,class: 'form-control' %>
-    </div>
+          <div class="form-group">
+            <%= f.label :password %>
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+            <% if @validatable %>
+                <span class="help-block"><%= @minimum_password_length %> characters minimum</span>
+            <% end %>
+          </div>
 
-    <div class="form-group">
-      <%= f.label :password %>
-      <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
-      <% if @validatable %>
-          <span class="help-block"><%= @minimum_password_length %> characters minimum</span>
+          <div class="form-group">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label :gender %>
+                <%= f.select :gender, options_for_select([["Male","male"],["Female","female"]]), {}, {required: 'true', class: 'form-control'} %>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group">
+                <label for="user_status">I'm</label>
+                <%= f.select :status, options_for_select([["a Student","student"],["an Instructor","instructor"]]), {}, {required: 'true', class: 'form-control'} %>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= f.label :date_of_birth  %>
+                <%= f.text_field :date_of_birth ,:class => 'form-control datepicker' %>
+              </div>
+            </div>
+          </div>
+
+          <%= f.submit "Sign up", class: 'btn btn-primary btn-block' %>
+          <hr>
+          <h3>Already Have an account ?</h3>
       <% end %>
+      <%= render "devise/shared/links" %>
     </div>
-
-    <div class="form-group">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-6">
-        <div class="form-group">
-          <%= f.label :gender %>
-          <%= f.select :gender, options_for_select([["Male","male"],["Female","female"]]), {}, {required: 'true', class: 'form-control'} %>
-        </div>
-      </div>
-      <div class="col-xs-6">
-        <div class="form-group">
-          <label for="user_status">I'm</label>
-          <%= f.select :status, options_for_select([["a Student","student"],["an Instructor","instructor"]]), {}, {required: 'true', class: 'form-control'} %>
-        </div>
-      </div>
-      <div class="col-xs-6">
-        <div class="form-group">
-          <%= f.label :date_of_birth  %>
-          <%= f.text_field :date_of_birth ,:class => 'form-control datepicker' %>
-        </div>
-      </div>
-    </div>
-
-    <%= f.submit "Sign up", class: 'btn btn-primary' %>
-<% end %>
-
-<%= render "devise/shared/links" %>
+  </div>
+</div>
 
 <script>
   $(function() {

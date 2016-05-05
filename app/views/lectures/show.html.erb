@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row">
     <!-- Blog Post Content Column -->
-    <div class="post col-xs-12">
+    <div class="post col-xs-offset-1 col-xs-10 col-xs-offset-1">
       <!-- Blog Post -->
-
+      <h1><%= link_to @lecture.try(:course).try(:title), course_path(@lecture.course_id), style: 'text-decoration: none;' %></h1>
       <!-- Title -->
       <div id="post_title">
-        <h1><%= @lecture.title %></h1>
+        <h2><%= @lecture.try(:title)%></h2>
       </div>
 
       <!-- Author -->
@@ -42,9 +42,20 @@
             <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center"></span>
             <span class="badge"><%= @lecture.get_downvotes.size %></span>
         <% end %>
+
+        <h4>Report as a spam?</h4>
+
+        <% if current_user.voted_on?(@lecture,:vote_scope => 'spam') %>
+            <%= link_to unspam_lecture_path(@lecture), class: 'dislike', method: :put do %>
+                <span class="glyphicon glyphicon-ban-circle glyphicon-align-center"></span>
+                <span class="badge">Reported as a spam</span>
+            <% end %>
+        <% else %>
+            <%= link_to spam_lecture_path(@lecture), class: 'like', method: :put do %>
+                <span class="glyphicon glyphicon-ban-circle glyphicon-align-center"></span>
+            <% end %>
+        <% end %>
       </div>
-
-
 
       <% if @lecture.attachment.file != nil %>
           <hr>
@@ -65,11 +76,15 @@
         <% @lecture.comments.each do |comment| %>
         <div class="comment media">
           <a class="pull-left" href="#">
-            <img class="media-object" src="http://placehold.it/64x64" alt="">
+            <% if comment.user.image.file != nil %>
+                <%= image_tag comment.user.image.url, class:'img img-circle', size: "64x64" %>
+            <% else %>
+                <img class="media-object" src="http://placehold.it/64x64" alt="">
+            <% end %>
           </a>
           <div class="media-body">
             <h4 class="media-heading"><%= comment.user.name %>
-              <small><%= comment.created_at %></small>
+              <small><%= time_ago_in_words(comment.created_at) %></small>
             </h4><blockquote class="comment_value"><%= comment.comment %></blockquote></div>
         </div>
         <% end %>

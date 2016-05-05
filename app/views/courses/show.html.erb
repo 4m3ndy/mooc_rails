@@ -12,7 +12,7 @@
     <div class="clearfix">
     </div>
   </div>
-  <p class="lead">This is the right place to discuss any ideas, critics, feature requests and all the ideas regarding our website. Please follow the forum rules and always check FAQ before posting to prevent duplicate posts.</p>
+  <p class="lead"><%= @course.try(:description) %></p>
   <table class="table forum table-striped">
     <thead>
     <tr>
@@ -34,7 +34,7 @@
       </td>
       <td class="text-center hidden-xs hidden-sm"><a><%= lecture.get_upvotes.size %></a></td>
       <td class="text-center hidden-xs hidden-sm"><a><%= lecture.comments.size %></a></td>
-      <td class="hidden-xs hidden-sm"><%= 'by' if lecture.comments.size != 0 %> <%= link_to lecture.comments.last.user.name if lecture.comments.size != 0 %><br><small><i class="fa fa-clock-o"></i><%= lecture.comments.last.created_at if lecture.comments.size != 0 %></small></td>
+      <td class="hidden-xs hidden-sm"><%= 'by' if lecture.comments.size != 0 %> <%= link_to lecture.comments.last.user.name if lecture.comments.size != 0 %><br><small><i class="fa fa-clock-o"></i><%= time_ago_in_words(lecture.comments.last.created_at)+" ago" if lecture.comments.size != 0 %></small></td>
     </tr>
     <% end %>
     </tbody>

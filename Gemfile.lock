@@ -239,6 +239,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
+  kaminari (~> 0.16.1)
   mini_magick (~> 4.3)
   mysql2 (~> 0.3.18)
   paperclip

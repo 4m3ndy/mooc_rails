@@ -1,13 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  content: MyText
-  attachment: MyString
-  course_id: 
-  user_id: 
-
-two:
-  content: MyText
-  attachment: MyString
-  course_id: 
-  user_id: 
+  id: 1
+  title: "Lecture1"
+  content: "MyText"
+  attachment: "MyString"
+  course_id: 1
+  user_id: 1
+#
+#two:
+#  content: MyText
+#  attachment: MyString
+#  course_id:
+#  user_id:

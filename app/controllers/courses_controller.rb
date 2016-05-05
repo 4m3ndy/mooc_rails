@@ -8,6 +8,11 @@ class CoursesController < InheritedResources::Base
     #Check if the user session equal to the user_id of the course
   #end
 
+  def index
+    #@courses = Course.all
+    @courses = Course.page(params[:page]).per(8)
+  end
+
   # POST /courses
   # POST /courses.json
   def create
@@ -50,7 +55,10 @@ class CoursesController < InheritedResources::Base
 
   # Use callbacks to share common setup or constraints between actions.
   def set_course
-    @course = Course.find(params[:id])
+    @course = Course.find_by_id(params[:id])
+    if @course == nil
+        render :file => "#{Rails.root}/public/404"
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

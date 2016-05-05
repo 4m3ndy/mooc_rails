@@ -12,6 +12,8 @@ Rails.application.routes.draw do
    member do
      put "like" => 'lectures#upvote'
      put "dislike" => 'lectures#downvote'
+     put "spam" => 'lectures#set_spammed'
+     put "unspam" => 'lectures#set_unspammed'
    end
   end
 

@@ -1,6 +1,6 @@
 class LecturesController < InheritedResources::Base
   before_action :authenticate_user!
-  before_action :set_lecture, only: [:show, :edit, :update, :destroy,:upvote, :downvote]
+  before_action :set_lecture, only: [:show, :edit, :update, :destroy,:upvote, :downvote,:set_spammed, :set_unspammed ]
   before_action :verify_user, only: [:edit, :update, :destroy]
 
   def create
@@ -11,6 +11,14 @@ class LecturesController < InheritedResources::Base
         format.html { redirect_to lecture_path(@lecture) }
         format.json { render :show, status: :created, location: @lecture }
       end
+    end
+  end
+
+  def index
+    respond_to do |format|
+      format.html { render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found }
+      format.xml  { head :not_found }
+      format.any  { head :not_found }
     end
   end
 
@@ -47,6 +55,16 @@ class LecturesController < InheritedResources::Base
     redirect_to @lecture
   end
 
+  def set_spammed
+    @lecture.liked_by current_user, :vote_scope => 'spam'
+    redirect_to @lecture
+  end
+
+  def set_unspammed
+    @lecture.unliked_by current_user, :vote_scope => 'spam'
+    redirect_to @lecture
+  end
+
   def destroy
     @lecture.destroy
     respond_to do |format|
@@ -58,7 +76,7 @@ class LecturesController < InheritedResources::Base
   private
 
     def set_lecture
-      @lecture = Lecture.find(params[:id])
+      @lecture = Lecture.find_by_id(params[:id])
     end
 
   def verify_user

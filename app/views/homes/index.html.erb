@@ -1,56 +1,17 @@
 <% content_for :top_content do %>
     <section class="container">
       <div class = "row">
-        <div class="col-xs-8 col-xs-offset-1">
-          <div class="row">
-            <div class="col-xs-12">
-              <article class="jumbotron">
-                <h1>Hello, world!</h1>
-                <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-              </article>
+        <div class="col-xs-12">
+          <article class="jumbotron">
+            <% if user_signed_in? %>
+                <h1><%= "Welcome, "+current_user.name %></h1>
+            <% else %>
+                <h1><%= "Welcome" %></h1>
+            <% end %>
+            <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+          </article>
             </div>
           </div>
-
-          <div class="col-xs-6">
-            <div class="thumbnail">
-              <img src="http://placehold.it/300x200" class="img-circle" >
-              <div class="caption">
-                <h3>Course Name</h3>
-                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                <p><a href="#" class="btn btn-default" role="button">View Course</a></p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-xs-6">
-            <div class="thumbnail">
-              <img src="http://placehold.it/300x200" class="img-circle" >
-              <div class="caption">
-                <h3>Course Name</h3>
-                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                <p><a href="#" class="btn btn-default" role="button">View Course</a></p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="col-xs-3">
-          <aside class="list-group">
-            <a href="#" class="list-group-item active">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-          </aside>
-        </div>
-      </div>
 
       <hr>
 
@@ -65,6 +26,72 @@
           <% end %>
       <% end %>
     </section>
-    <br>
-    <br>
+    <div class="container">
+      <div class="page-header">
+        <h1 id="timeline">Courses</h1>
+      </div>
+      <ul class="timeline">
+        <li>
+          <div class="timeline-badge primary"><i class="glyphicon glyphicon-education"></i></div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h3 class="timeline-title"><%= @courses[0].title %></h3>
+              <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= " "+time_ago_in_words(@courses[0].created_at)+' ago' %></small></p>
+              <p><small class="text-muted"><%= "by: "+(@courses[0].user.name)%></small></p>
+            </div>
+            <div class="timeline-body">
+              <p><%= @courses[0].try(:description) %></p>
+              <br>
+              <%= link_to 'View Course', course_path(@courses[0].id) %>
+            </div>
+          </div>
+        </li>
+        <li class="timeline-inverted">
+          <div class="timeline-badge success"><i class="glyphicon glyphicon-education"></i></div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h3 class="timeline-title"><%= @courses[1].title %></h3>
+              <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= " "+time_ago_in_words(@courses[1].created_at)+' ago' %></small></p>
+              <p><small class="text-muted"><%= "by: "+(@courses[1].user.name)%></small></p>
+            </div>
+            <div class="timeline-body">
+              <p><%= @courses[1].try(:description) %></p>
+              <br>
+              <%= link_to 'View Course', course_path(@courses[1].id) %>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="timeline-badge warning"><i class="glyphicon glyphicon-education"></i></div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h3 class="timeline-title"><%= @courses[2].title %></h3>
+              <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= " "+time_ago_in_words(@courses[2].created_at)+' ago' %></small></p>
+              <p><small class="text-muted"><%= "by: "+(@courses[2].user.name)%></small></p>
+            </div>
+            <div class="timeline-body">
+              <p><%= @courses[2].try(:description) %></p>
+              <br>
+              <%= link_to 'View Course', course_path(@courses[2].id) %>
+            </div>
+          </div>
+        </li>
+        <li class="timeline-inverted">
+          <div class="timeline-badge danger"><i class="glyphicon glyphicon-education"></i></div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h3 class="timeline-title"><%= @courses[3].title %></h3>
+              <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= " "+time_ago_in_words(@courses[3].created_at)+' ago' %></small></p>
+              <p><small class="text-muted"><%= "by: "+(@courses[3].user.name)%></small></p>
+            </div>
+            <div class="timeline-body">
+              <p><%= @courses[3].try(:description) %></p>
+              <br>
+              <%= link_to 'View Course', course_path(@courses[3].id) %>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
 <% end %>
